@@ -46,10 +46,10 @@ def read_csv(filename: str) -> list:
 
 # пишет в файлы
 def write_csv(filename: str) -> list:
-    with open(filename, 'w', encoding='utf-8') as file:
-        for contact in filename:
-            file.write(
-                f"{contact[0]}; {contact[1]}; {contact[2]}; {contact[3]}\n")
+    with open(filename, 'w', encoding='utf-8') as f:
+        for contact in phonebook:
+            f.write(
+                f"{contact[0]}, {contact[1]}, {contact[2]}\n")
 
 
 # пишет в файлы
@@ -104,7 +104,7 @@ def find_by_phone_number(phonebook):
 
 
 # добавляет нового абонента в справочник
-def add_contact(phonebook):
+def add_contact(phonebook: list):
     last_name = input("Введите фамилию: ")
     first_name = input("Введите имя: ")
     phone_number = input("Введите номер телефона: ")
@@ -136,10 +136,12 @@ def workWithPhonebook():
             find_by_phone_number(phonebook)
         elif choice == 4:
             add_contact(phonebook)
+            write_csv("phonebook.csv")
         elif choice == 5:
             save_to_txt(phonebook)
         elif choice == 6:
             remove_by_last_name(phonebook)
+            write_csv("phonebook.csv")
         elif choice == 7:
             print("Работа программы завершена")
             break
